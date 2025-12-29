@@ -11,3 +11,8 @@ Connect and add videos to a shared YouTube playlist to be played in desired orde
 4. After desired video shown, 'Add video' button available.
 
 5. Video is added to list.
+
+## To-Do
+
+- Troubleshoot FastAPI to DB connection (change image and get net tools to test connection)
+

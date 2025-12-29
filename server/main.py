@@ -1,3 +1,4 @@
+from datetime import datetime
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -9,6 +10,7 @@ class Video(BaseModel):
     id: int
     name: str
     link: str
+    created_at: datetime
 
 @app.get("/")
 def home():
