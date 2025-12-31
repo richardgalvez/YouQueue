@@ -1,10 +1,14 @@
+from sqlalchemy import DateTime, String, func
+from sqlalchemy.orm import Mapped, mapped_column
 from db import Base
-from sqlalchemy import Column, Integer, String, DateTime, func
 
 class Video(Base):
     __tablename__ = "videos"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    link = Column(String, index=True)
-    created_at = Column(DateTime, server_default=func.now())
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(255), index=True)
+    link: Mapped[str] = mapped_column(String(255))
+    created_at: Mapped[DateTime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+    )

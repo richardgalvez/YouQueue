@@ -1,23 +1,12 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
-from dotenv import load_dotenv
 import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-load_dotenv()
+DB_URL = os.environ["DB_URL"]
 
-DB_URL = os.getenv("DB_URL")
+engine = create_engine(DB_URL, echo=True, pool_pre_ping=True)
 
-engine = create_engine(DB_URL)
+SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-def create_table():
-    Base.metadata.create_all(bind=engine)
+class Base(DeclarativeBase):
+    pass
